@@ -8,6 +8,9 @@ class Vetor():
    RAD_PARA_GRAUS: float  = 57.29 # const de conversao usado por todos elementos da classe
 
    def __init__(self, dimensoes:int):
+      if dimensoes < 2:
+         print("vetor nao pode ter menos que 2 dimensoes")
+         return None
       self.dimensoes = dimensoes
       self.lista_coord = [0] * dimensoes #inicializa a lista com 0 nas posicoes até dimensoes
    
@@ -98,9 +101,9 @@ class Vetor():
    def angulo_grau(self,outro_vetor:object)->float:
       return self.RAD_PARA_GRAUS * self.angulo_rad(outro_vetor)
    
-   def normalizar(self)-> object: #retorna um Vetor paralelo ao atual porém com norma/modulo = 1
+   def vetor_normal(self)-> object: #retorna um Vetor paralelo ao atual porém com norma/modulo = 1
         novo_vetor = Vetor(self.dimensoes)
-        modulo: float = self.modulo()
+        modulo: float = self.modulo() 
         if modulo == 0:
            print("nao e possivel normalizar um Vetor com modulo zero")
            return None
@@ -109,20 +112,38 @@ class Vetor():
            novo_vetor[i] = self[i]/modulo
 
         return novo_vetor
-
    
-vetor1 = Vetor(2)
+   def vetor_perpendicular(self)->object:
+      novo_vetor = Vetor(self.dimensoes)
+
+      if self.dimensoes == 2:
+         novo_vetor[0] = self[1] * -1 #inverte as 2 primeiras coordenadas de posição e inverte o sinal de uma delas
+         novo_vetor[1] = self[0]
+         return novo_vetor
+      else:
+         novo_vetor[0] = self[1] * -1
+         novo_vetor[1] = self[0]
+         for i in range(2,self.dimensoes): #outras coordenadas alem das 2 primeiras sao zeradas para o prod escalar ser 0
+            novo_vetor[i] = 0
+         return novo_vetor
+
+     
+
+
+vetor1 = Vetor(3)
 
 vetor2 = Vetor(2)
 
-vetor1.seta_valores([1,2])
+vetor1.seta_valores([1,2,3])
 
 vetor2.seta_valores([2,-1])
 
-vetor3 = vetor1.normalizar()
+vetor3: Vetor  = vetor1.vetor_perpendicular()
 
-#print(prod_escalar)
+vetor4: float = vetor3 * vetor1
+
 print(vetor3.valores())
+print(vetor4)
    
 
          
