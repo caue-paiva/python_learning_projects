@@ -62,7 +62,7 @@ class Vetor():
             return  prod_escalar
       else:
          print("produto escalar requer 2 Vetor da mesma classe")
-
+ 
    def seta_valores(self, lista_coord: list): #enche um Vetor com uma lista de coordenadas (float ou int)
       if len(lista_coord) != self.dimensoes:
           print("o Vetor nao tem essa dimensao")
@@ -127,23 +127,43 @@ class Vetor():
             novo_vetor[i] = 0
          return novo_vetor
 
-     
+   def vetores_paralelos(self,outro_vetor:object)-> bool:
+      if isinstance(outro_vetor,Vetor):     
+         if self.dimensoes != outro_vetor.dimensoes:
+            return False
+         else:
+            multi_escalar: float
+            dimen_para_checar = 0
+            for i in range(self.dimensoes):     
+              if i == dimen_para_checar:
+                 if outro_vetor[i] == 0: 
+                    if self[i] != 0:
+                     return False
+                    else:
+                     dimen_para_checar += 1
+                     continue
+                 multi_escalar = self[i]/outro_vetor[i]
+                 continue
+              
+              if abs(self[i]/outro_vetor[i] - multi_escalar) > 1e-6:
+                 return False 
+           
+            return True
+      else:
+         return False
+    
 
 
 vetor1 = Vetor(3)
 
-vetor2 = Vetor(2)
+vetor2 = Vetor(3)
 
-vetor1.seta_valores([1,2,3])
+vetor1.seta_valores([0,2,3])
 
-vetor2.seta_valores([2,-1])
+vetor2.seta_valores([0,4,5])
 
-vetor3: Vetor  = vetor1.vetor_perpendicular()
 
-vetor4: float = vetor3 * vetor1
-
-print(vetor3.valores())
-print(vetor4)
+print(vetor1.vetores_paralelos(vetor2))
    
 
          
