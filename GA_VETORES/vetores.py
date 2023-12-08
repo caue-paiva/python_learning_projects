@@ -101,7 +101,7 @@ class Vetor():
    def angulo_grau(self,outro_vetor:object)->float:
       return self.RAD_PARA_GRAUS * self.angulo_rad(outro_vetor)
    
-   def vetor_normal(self)-> object: #retorna um Vetor paralelo ao atual porém com norma/modulo = 1
+   def normalizar(self)-> object: #retorna um Vetor paralelo ao atual porém com norma/modulo = 1
         novo_vetor = Vetor(self.dimensoes)
         modulo: float = self.modulo() 
         if modulo == 0:
