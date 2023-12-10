@@ -11,13 +11,11 @@ nota_fn  = lambda x : x["nota"]
 
 
 lista_dict.sort(key=nota_fn)"""
-lista: list = [1,2,971,17828,1892,1082]
-lista2 = [8,98,283]
+lista: list = [1,2,971,17828]
+lista2: list = [4,52,2]
+lista.append(54)
 
-lista.extend(lista2)
-
-lista2[0] = -18928
+print(lista)
 
 
-print(lista )
 
