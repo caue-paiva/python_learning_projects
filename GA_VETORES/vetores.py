@@ -1,7 +1,6 @@
 from math import sqrt, acos
 
 
-
 class Vetor():
    lista_coord: list  #templates das variaveis individuais de cada classe
    dimensoes: int 
